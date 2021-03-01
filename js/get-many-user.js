@@ -17,5 +17,8 @@ const getManyUsers = function () {
     users.push(creatingUser(i + 1, comments, randomManyDescriptions));
   }
   window.console.log(users);
+  return users;
 }
-getManyUsers();
+const people = getManyUsers();
+
+export { people };
