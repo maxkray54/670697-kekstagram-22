@@ -40,7 +40,7 @@ const getRandomName = function () {
 }
 
 const creatingComment = function (randomManyNames, id) {
-  let comment = {
+  const comment = {
     id: id,
     avatar: `img/avatar-${randomInteger(1, 6)}.svg`,
     message: 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
