@@ -1,5 +1,5 @@
 import { people } from './get-many-user.js';
-import { pictures } from './pictures.js';
+import { pictures, picturesLinks } from './pictures.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
@@ -41,15 +41,27 @@ const getManyComments = function (idPost) {
   }
 };
 
-pictures.addEventListener('click', () => {
-  body.classList.add('modal-open');
-  bigPicture.classList.remove('hidden');
-  socialCommentCount.classList.add('hidden');
-  socialCommentLoader.classList.add('hidden');
-});
+//перебор нод.листа чтобы при клике открывалось
+
+for (let i = 0; i < picturesLinks.length; i++) {
+  picturesLinks[i].addEventListener('click', function () {
+    body.classList.add('modal-open');
+    bigPicture.classList.remove('hidden');
+    socialCommentCount.classList.add('hidden');
+    socialCommentLoader.classList.add('hidden');
+  });
+}
+
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
 
 bigPictureCancel.addEventListener('click', () => {
   body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
+});
+
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === ('Escape' || 'Esc')) {
+    body.classList.remove('modal-open');
+    bigPicture.classList.add('hidden');
+  }
 });

@@ -4,3 +4,5 @@ import './creating-comment.js';
 import './get-many-user.js';
 import './pictures.js';
 import './big-pictures.js';
+import './editor.js';
+import './editor-effects.js';
