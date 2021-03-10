@@ -19,6 +19,6 @@ const getManyUsers = function () {
   window.console.log(users);
   return users;
 }
-const people = getManyUsers();
+const allUsers = getManyUsers();
 
-export { people };
+export { allUsers };

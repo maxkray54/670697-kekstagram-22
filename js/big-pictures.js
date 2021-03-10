@@ -1,4 +1,4 @@
-import { people } from './get-many-user.js';
+import { allUsers } from './get-many-user.js';
 import { pictures, picturesLinks } from './pictures.js';
 
 const bigPicture = document.querySelector('.big-picture');
@@ -7,7 +7,7 @@ const socialCommentLoader = bigPicture.querySelector('.social__comments-loader')
 const body = document.querySelector('body');
 
 pictures.addEventListener('click', (evt) => {
-  const idPost = people[evt.target.id - 1]
+  const idPost = allUsers[evt.target.id - 1]
 
   const bigPictureImg = bigPicture.querySelector('.big-picture__img > img');
   const socialCaption = bigPicture.querySelector('.social__caption');
