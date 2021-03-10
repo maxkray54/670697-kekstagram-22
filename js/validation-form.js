@@ -16,7 +16,7 @@ const validateHashTags = (str) => {
   }
   const hashTags = str
     .toLowerCase()
-    .split('')
+    .split(' ')
     .filter((words) => words.length !== 0);
 
   for (let i = 0; i < hashTags.length; i++) {
