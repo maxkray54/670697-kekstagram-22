@@ -1,10 +1,8 @@
-import { allUsers } from './get-many-user.js';
-
 //отображение фотографий пользователей
 const picture = document.querySelector('#picture');
 const pictures = document.querySelector('.pictures');
 
-const drawUsersPictures = function () {
+const drawUsersPictures = (allUsers) => {
   for (let i = 0; i < allUsers.length; i++) {
     const pictureLinkClone = picture.content.cloneNode(true);
     const pictureImage = pictureLinkClone.querySelector('.picture__img');
@@ -17,11 +15,9 @@ const drawUsersPictures = function () {
     pictureImage.setAttribute('id', allUsers[i].id);
     pictureImage.setAttribute('alt', allUsers[i].description);
     pictureLikes.textContent = allUsers[i].likes;
-    pictureComments.textContent = allUsers[i].comment.length;
+    pictureComments.textContent = allUsers[i].comments.length;
     pictures.appendChild(pictureLinkClone);
   }
 };
-drawUsersPictures();
 
-const picturesLinks = document.querySelectorAll('.picture');
-export { pictures, picturesLinks };
+export { pictures, drawUsersPictures };

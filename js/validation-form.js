@@ -1,3 +1,5 @@
+import { isEscape } from './util.js';
+
 const uploadImgModal = document.querySelector('.img-upload__overlay');
 const textHashtag = uploadImgModal.querySelector('.text__hashtags');
 const textDescription = uploadImgModal.querySelector('.text__description');
@@ -70,3 +72,54 @@ textHashtag.addEventListener('input', () => {
     textHashtag.reportValidity();
   }
 });
+
+//Валидация отправки формы
+const mainBlock = document.querySelector('main');
+
+const MessageType = {
+  SUCCESS: document.querySelector('#success').content.querySelector('.success').cloneNode(true),
+  ERROR: document.querySelector('#error').content.querySelector('.error').cloneNode(true),
+}
+
+const showMessage = (messageType) => {
+  const buttonClosePopup = messageType.querySelector('button');
+
+  const fillMessage = () => {
+    mainBlock.appendChild(messageType);
+    buttonClosePopup.addEventListener('click', closePopup);
+    document.addEventListener('keydown', onPopupEscKeydown);
+    mainBlock.addEventListener('click', onCloseClickOutside);
+  }
+
+  const onPopupEscKeydown = (evt) => {
+    if (isEscape(evt)) {
+      evt.preventDefault();
+      closePopup();
+    }
+  };
+
+  const closePopup = () => {
+    mainBlock.removeChild(messageType);
+    document.removeEventListener('keydown', onPopupEscKeydown);
+    mainBlock.removeEventListener('click', onCloseClickOutside);
+    buttonClosePopup.removeEventListener('click', closePopup);
+
+  }
+
+  const onCloseClickOutside = (evt) => {
+    if (evt.target === messageType.querySelector('div')) return;
+    closePopup();
+  }
+
+  fillMessage();
+}
+
+const showError = () => {
+  showMessage(MessageType.ERROR);
+}
+
+const showSuccess = () => {
+  showMessage(MessageType.SUCCESS);
+}
+
+export { showError, showSuccess, textHashtag, textDescription };
