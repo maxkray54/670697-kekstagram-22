@@ -1,3 +1,6 @@
+import { showError, showSuccess, textHashtag, textDescription } from './validation-form.js';
+// import { effectLevelValue, imgUploadEffectsLevel } from './editor-effects.js';
+
 const body = document.querySelector('body');
 const uploadImgModal = document.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
@@ -11,9 +14,13 @@ uploadFile.addEventListener('change', function () {
 })
 
 const closeModal = () => {
+  document.querySelector('.effects__preview').click();
   uploadImgModal.classList.add('hidden');
   body.classList.remove('modal-open');
   uploadFile.value = '';
+  textHashtag.value = '';
+  textDescription.value = '';
+  resetSettings();
 };
 
 uploadImgModalClose.addEventListener('click', function () {
@@ -66,3 +73,29 @@ controlSmaller.addEventListener('click', () => {
   scale = scale / 100;
   uloadImagePreview.style.transform = 'scale(' + scale + ')';
 });
+
+//Отправка данных
+const imgUploadForm = document.querySelector('.img-upload__form');
+const setUserFormSubmit = () => {
+  imgUploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://22.javascript.pages.academy/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then((response) => {
+      closeModal();
+      if (response.ok) {
+        showSuccess();
+      } else {
+        showError();
+      }
+    });
+  });
+};
+setUserFormSubmit();

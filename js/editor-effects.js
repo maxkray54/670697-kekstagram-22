@@ -3,7 +3,6 @@ const imgUploadEffectsLevel = document.querySelector('.img-upload__effect-level'
 const effectsLevelSlider = document.querySelector('.effect-level__slider');
 const uploadPreviewImg = document.querySelector('.img-upload__preview > img');
 const effectLevelValue = document.querySelector('.effect-level__value');
-
 imgUploadEffectsLevel.classList.add('visually-hidden')
 
 const Slider = {
@@ -71,3 +70,4 @@ effectsLevelSlider.noUiSlider.on('change', () => {
 
   uploadPreviewImg.style.filter = effects[lastClass.replace('effects__preview--', '')]();
 });
+export { effectLevelValue, imgUploadEffectsLevel };
