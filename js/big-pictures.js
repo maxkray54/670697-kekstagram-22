@@ -9,13 +9,14 @@ const setData = (allUsers) => {
   const picturesLinks = document.querySelectorAll('.picture');
   for (let i = 0; i < picturesLinks.length; i++) {
     picturesLinks[i].addEventListener('click', (evt) => {
-      const idPost = allUsers[evt.target.id]
+      const idPost = allUsers.filter(item => item.id == evt.target.id.split('-')[1])[0];
       const bigPictureImg = bigPicture.querySelector('.big-picture__img > img');
       const socialCaption = bigPicture.querySelector('.social__caption');
       const socialLikes = bigPicture.querySelector('.social__likes > .likes-count');
       const commentsCount = bigPicture.querySelector('.comments-count');
 
       bigPictureImg.setAttribute('src', idPost.url);
+      bigPictureImg.setAttribute('alt', idPost.description);
       socialCaption.textContent = idPost.description;
       socialLikes.textContent = idPost.likes;
       commentsCount.textContent = idPost.comments.length;
@@ -46,11 +47,13 @@ const getManyComments = function (idPost) {
 const setClickEvts = function () {
   const picturesLinks = document.querySelectorAll('.picture');
   for (let i = 0; i < picturesLinks.length; i++) {
-    picturesLinks[i].addEventListener('click', function () {
-      body.classList.add('modal-open');
-      bigPicture.classList.remove('hidden');
-      socialCommentCount.classList.add('hidden');
-      socialCommentLoader.classList.add('hidden');
+    picturesLinks[i].addEventListener('click', function (evt) {
+      if (evt.target.id) {
+        body.classList.add('modal-open');
+        bigPicture.classList.remove('hidden');
+        socialCommentCount.classList.add('hidden');
+        socialCommentLoader.classList.add('hidden');
+      }
     });
   }
 };
