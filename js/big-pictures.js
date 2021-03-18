@@ -41,7 +41,43 @@ const getManyComments = function (idPost) {
     socialText.textContent = idPost.comments[i].message;
     socialComments.appendChild(socialCommentClone);
   }
+  const allComments = document.querySelectorAll('.social__comment');
+
+  allComments.forEach((comment) => {
+    comment.classList.add('hidden');
+  });
+
+  showComments(5);
+
+  if (idPost.comments.length <= 5) {
+    socialCommentCount.classList.add('hidden');
+    socialCommentLoader.classList.add('hidden');
+  } else {
+    socialCommentCount.classList.remove('hidden');
+    socialCommentLoader.classList.remove('hidden');
+  }
 };
+
+//скрываем коммпентарии, по клику добавляем и считаем сколько уже открытых комментариев
+const showComments = (n) => {
+  const hiddenComments = document.querySelectorAll('.social__comment.hidden');
+  const initialComments = Array.prototype.slice.call(hiddenComments).slice(0, n);
+
+  initialComments.forEach((comment) => {
+    comment.classList.remove('hidden');
+  });
+
+  const quantityHiddenComments = document.querySelectorAll('.social__comment.hidden').length;
+  document.querySelector('.displayed-comments').textContent = document.querySelectorAll('.social__comment').length - quantityHiddenComments;
+
+  if (quantityHiddenComments == 0) {
+    socialCommentLoader.classList.add('hidden');
+  }
+};
+
+socialCommentLoader.addEventListener('click', () => {
+  showComments(5);
+});
 
 //перебор нод.листа чтобы при клике открывалось
 const setClickEvts = function () {
@@ -51,8 +87,6 @@ const setClickEvts = function () {
       if (evt.target.id) {
         body.classList.add('modal-open');
         bigPicture.classList.remove('hidden');
-        socialCommentCount.classList.add('hidden');
-        socialCommentLoader.classList.add('hidden');
       }
     });
   }
