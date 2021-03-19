@@ -99,3 +99,5 @@ const setUserFormSubmit = () => {
   });
 };
 setUserFormSubmit();
+
+export { closeModal };

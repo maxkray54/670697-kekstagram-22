@@ -6,3 +6,4 @@ import './editor.js';
 import './editor-effects.js';
 import './validation-form.js';
 import './filter-posts.js';
+import './load-user-photo.js';
