@@ -17,7 +17,7 @@ const updateFilter = (array) => {
     'filter-default': setDefaultPosts(array),
     'filter-random': setRandomPosts(array),
     'filter-discussed': setCommentsPosts(array),
-  }
+  };
 
   let filterType = filterTypes[imgFilter.querySelector('.img-filters__button--active').id];
   return filterType;
@@ -25,7 +25,7 @@ const updateFilter = (array) => {
 
 const updatePictures = () => {
   document.querySelectorAll('.picture').forEach(element => element.remove());
-}
+};
 
 const onFilterClick = (evt, posts) => {
   if (!evt.target.classList.contains('img-filters__button')) {
@@ -39,6 +39,6 @@ const onFilterClick = (evt, posts) => {
     const debounceRender = _.debounce(drawUsersPictures, BIDE);
     debounceRender(updateFilter(posts));
   }
-}
+};
 
 export { imgFilter, imgFilterForm, updatePictures, onFilterClick }
