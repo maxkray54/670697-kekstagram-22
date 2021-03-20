@@ -54,7 +54,7 @@ const onEffectsGroup = (evt) => {
   }
 };
 
-imgUploadEffects.addEventListener('click', onEffectsGroup)
+imgUploadEffects.addEventListener('click', onEffectsGroup);
 
 window.noUiSlider.create(effectsLevelSlider, {
   range: {

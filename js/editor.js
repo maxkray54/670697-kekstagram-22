@@ -7,11 +7,11 @@ const uploadFile = document.querySelector('#upload-file');
 const uploadImgModalClose = document.querySelector('#upload-cancel');
 
 // Открывает окно после того как загрузиться файл и измениться значение формы
-uploadFile.addEventListener('change', function () {
+uploadFile.addEventListener('change', () => {
   resetSettings();
   uploadImgModal.classList.remove('hidden');
   body.classList.add('modal-open');
-})
+});
 
 const closeModal = () => {
   document.querySelector('.effects__preview').click();
@@ -23,7 +23,7 @@ const closeModal = () => {
   resetSettings();
 };
 
-uploadImgModalClose.addEventListener('click', function () {
+uploadImgModalClose.addEventListener('click', () => {
   closeModal();
 });
 

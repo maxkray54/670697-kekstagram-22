@@ -26,7 +26,7 @@ const setData = (allUsers) => {
   }
 };
 
-const getManyComments = function (idPost) {
+const getManyComments = (idPost) => {
   const socialComment = bigPicture.querySelector('.social__comment');
   const socialComments = bigPicture.querySelector('.social__comments');
   socialComments.innerHTML = '';
@@ -80,7 +80,7 @@ socialCommentLoader.addEventListener('click', () => {
 });
 
 //перебор нод.листа чтобы при клике открывалось
-const setClickEvts = function () {
+const setClickEvts = () => {
   const picturesLinks = document.querySelectorAll('.picture');
   for (let i = 0; i < picturesLinks.length; i++) {
     picturesLinks[i].addEventListener('click', function (evt) {
