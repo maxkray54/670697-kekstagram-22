@@ -20,6 +20,11 @@ const loadUserPhoto = () => {
       closeModal();
     }
 
+    if (fileUpload.files[0].size > 1000000) {
+      showAlert('Картинка весит больше 1мб, выберите другую');
+      closeModal();
+    }
+
     if (matches) {
       const reader = new FileReader();
 
