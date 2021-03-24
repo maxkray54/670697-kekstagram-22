@@ -1,4 +1,5 @@
 import { showError, showSuccess, textHashtag, textDescription } from './validation-form.js';
+import { isEscEvent } from './util.js';
 // import { effectLevelValue, imgUploadEffectsLevel } from './editor-effects.js';
 
 const body = document.querySelector('body');
@@ -11,6 +12,7 @@ uploadFile.addEventListener('change', () => {
   resetSettings();
   uploadImgModal.classList.remove('hidden');
   body.classList.add('modal-open');
+  document.addEventListener('keydown', onEditorEscKeydown);
 });
 
 const closeModal = () => {
@@ -21,17 +23,19 @@ const closeModal = () => {
   textHashtag.value = '';
   textDescription.value = '';
   resetSettings();
+  document.removeEventListener('keydown', onEditorEscKeydown);
 };
 
 uploadImgModalClose.addEventListener('click', () => {
   closeModal();
 });
 
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === ('Escape' || 'Esc')) {
+const onEditorEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
     closeModal();
   }
-});
+};
 
 // Масштабирование изображения
 const controlBigger = uploadImgModal.querySelector('.scale__control--bigger');

@@ -1,4 +1,7 @@
-import { isEscape } from './util.js';
+import { isEscEvent } from './util.js';
+
+const QUANTITY_SYMBOLS = 20;
+const QUANTITY_HASHTAG = 5;
 
 const uploadImgModal = document.querySelector('.img-upload__overlay');
 const textHashtag = uploadImgModal.querySelector('.text__hashtags');
@@ -30,7 +33,7 @@ const validateHashTags = (str) => {
       return false;
     }
 
-    if (tag.length > 20) {
+    if (tag.length > QUANTITY_SYMBOLS) {
       textHashtag.setCustomValidity('Максимальная длина ХэшТега 20 символов, включая решётку');
       return false;
     }
@@ -48,7 +51,7 @@ const validateHashTags = (str) => {
     return false;
   }
 
-  if (hashTags.length > 5) {
+  if (hashTags.length > QUANTITY_HASHTAG) {
     textHashtag.setCustomValidity('Нельзя указать больше пяти ХэшТегов 5');
     return false;
   }
@@ -93,7 +96,7 @@ const showMessage = (messageType) => {
   };
 
   const onPopupEscKeydown = (evt) => {
-    if (isEscape(evt)) {
+    if (isEscEvent(evt)) {
       evt.preventDefault();
       closePopup();
     }
@@ -107,8 +110,10 @@ const showMessage = (messageType) => {
   };
 
   const onCloseClickOutside = (evt) => {
-    if (evt.target === messageType.querySelector('div')) return;
-    closePopup();
+    if (evt.target === messageType.querySelector('div')) {
+      closePopup();
+      return;
+    }
   };
 
   fillMessage();
