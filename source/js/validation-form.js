@@ -9,8 +9,10 @@ const textDescription = uploadImgModal.querySelector('.text__description');
 
 //Валидтация ХэшТегов
 const validateHashTag = (hashtag) => {
+  window.console.log(hashtag);
   const regexp = /^#\w{1,19}$/;
   const searchMatches = hashtag.match(regexp);
+  window.console.log(searchMatches);
   return searchMatches !== null;
 };
 
@@ -25,39 +27,41 @@ const validateHashTags = (str) => {
     .split(' ')
     .filter((words) => words.length !== 0);
 
-  for (let i = 0; i < hashTags.length; i++) {
-    const tag = hashTags[i];
+  let isValid = true;
 
-    if (!tag.startsWith('#')) {
-      textHashtag.setCustomValidity('ХэшТег должен начинаться с символа #');
-      return false;
+  hashTags.forEach((index) => {
+    const tag = index;
+
+    if (!validateHashTag(index)) {
+      textHashtag.setCustomValidity(
+        'ХэшТег может состоять только из букв и чисел',
+      );
+      isValid = false;
     }
 
     if (tag.length > QUANTITY_SYMBOLS) {
       textHashtag.setCustomValidity('Максимальная длина ХэшТега 20 символов, включая решётку');
-      return false;
+      isValid = false;
     }
 
-    if (!validateHashTag(hashTags[i])) {
-      textHashtag.setCustomValidity(
-        'ХэшТег может состоять только из букв и чисел',
-      );
-      return false;
+    if (!tag.startsWith('#')) {
+      textHashtag.setCustomValidity('ХэшТег должен начинаться с символа #');
+      isValid = false;
     }
-  }
+  });
 
   if (hashTags.length !== new Set(hashTags).size) {
     textHashtag.setCustomValidity('ХэшТеги не могут быть использованы дважды');
-    return false;
+    isValid = false;
   }
 
   if (hashTags.length > QUANTITY_HASHTAG) {
     textHashtag.setCustomValidity('Нельзя указать больше пяти ХэшТегов 5');
-    return false;
+    isValid = false;
   }
 
-  textHashtag.setCustomValidity('');
-  return true;
+  isValid && textHashtag.setCustomValidity('');
+  return isValid;
 };
 
 //Если поле ввода в фокусе отключает закрытие по esc

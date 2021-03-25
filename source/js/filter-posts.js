@@ -54,13 +54,9 @@ const setPictureFilter = (pictures) => {
     filterDiscussed.classList.add(FILTER_BUTTON_ACTIVE);
   };
 
-  const sortByDefaultThrottle = _.debounce(sortByDefault, BIDE);
-  const sortByRandomThrottle = _.debounce(sortByRandom, BIDE);
-  const sortByDiscussedThrottle = _.debounce(sortByDiscussed, BIDE);
-
-  filterDefault.addEventListener('click', sortByDefaultThrottle);
-  filterRandom.addEventListener('click', sortByRandomThrottle);
-  filterDiscussed.addEventListener('click', sortByDiscussedThrottle);
+  filterDefault.addEventListener('click', _.debounce(sortByDefault, BIDE), true);
+  filterRandom.addEventListener('click', _.debounce(sortByRandom, BIDE), true);
+  filterDiscussed.addEventListener('click', _.debounce(sortByDiscussed, BIDE), true);
 
   const clearPictures = () => {
     const allPicturesList = document.querySelectorAll('.picture');
