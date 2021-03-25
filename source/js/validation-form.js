@@ -9,10 +9,8 @@ const textDescription = uploadImgModal.querySelector('.text__description');
 
 //Валидтация ХэшТегов
 const validateHashTag = (hashtag) => {
-  window.console.log(hashtag);
   const regexp = /^#\w{1,19}$/;
   const searchMatches = hashtag.match(regexp);
-  window.console.log(searchMatches);
   return searchMatches !== null;
 };
 
